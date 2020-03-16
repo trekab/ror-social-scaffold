@@ -11,4 +11,10 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :friends
   has_many :inverse_friends, :class_name => "Friend", :foreign_key => "pal_id"
+
+  def pals
+    pals_array = friends.map{|friend| friend.pal if friend.friendship_status}
+    pals_array + inverse_friends.map{|friend| friend.user if friend.friendship_status}
+    pals_array.compact
+  endss
 end
