@@ -10,29 +10,30 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :friends
-  has_many :inverse_friends, class_name: "Friend", foreign_key: "pal_id"
+  has_many :inverse_friends, class_name: 'Friend', foreign_key: 'pal_id'
 
   def pals
-    pals_array = self.friends.map{|friend| friend.pal if friend.friendship_status}
-    pals_array + self.inverse_friends.map{|friend| friend.user if friend.friendship_status}
+    pals_array = friends.map { |friend| friend.pal if friend.friendship_status }
+    inverse_pals = inverse_friends.map { |friend| friend.user if friend.friendship_status }
+    inverse_pals.each { |pal| pals_array << pal }
     pals_array.compact
   end
 
   def pending_friends
-    self.friends.map{|friend| friend.pal if !friend.friendship_status}.compact
+    friends.map { |friend| friend.pal unless friend.friendship_status }.compact
   end
 
   def friend_requests
-    self.inverse_friends.map{|friend| friend.user if !friend.friendship_status}.compact
+    inverse_friends.map { |friend| friend.user unless friend.friendship_status }.compact
   end
 
   def confirm_friend(user)
-    friend = self.inverse_friends.find{|friend| friend.user == user}
-    friend.friendship_status = true
-    friend.save
+    pal = inverse_friends.find { |friend| friend.user == user }
+    pal.friendship_status = true
+    pal.save
   end
 
   def friend?(user)
-    self.pals.include?(user)
+    pals.include?(user)
   end
 end
