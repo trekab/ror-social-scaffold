@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def invite_to_friendship
-    
     # render 'index'
   end
 end
