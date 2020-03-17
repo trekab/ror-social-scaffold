@@ -6,6 +6,9 @@
         <span class="profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
         </span>
+        <% unless current_user.friend?(user) || current_user == user %>
+          <%= button_to 'Invite to friendship', "#{invite_to_friendship_path}", method: :post %>
+        <% end %>
       </li>
     <% end %>
   </ul>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'posts#index'
+  post 'invite-to-friendship', to: 'users#invite_to_friendship'
 
   devise_for :users
 
