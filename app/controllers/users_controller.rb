@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
     @friend_inverse = Friend.find_by(user_id: current_user.id, pal_id: params[:id])
 
-    if !@friend 
+    if !@friend
       @friend = Friend.new(user_id: params[:id], pal_id: current_user.id)
       @friend.save
     elsif !@friend_inverse
