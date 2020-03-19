@@ -1,0 +1,3 @@
+def FriendsController < ApplicationController
+	
+end

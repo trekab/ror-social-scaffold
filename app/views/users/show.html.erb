@@ -1,8 +1,13 @@
 <section class="user-section">
   <h2><%= "Name: #{@user.name}" %></h2>
   <% unless current_user.friend?(@user) || current_user == @user %>
-    <%= button_to 'Invite to friendship', "#{invite_to_friendship_path}", method: :post %>
+    <%= link_to 'Invite to friendship', invite_to_friendship_path(@user), class: "profile-link" %>
   <% end %>
+  <!--
+  <% if current_user.friends.pending.include?(@user) %>
+    <%= link_to 'Pending', accept_friendship_path(@user), class: "profile-link" %>
+  <% end %>
+-->
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
