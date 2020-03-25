@@ -11,13 +11,10 @@ class UsersController < ApplicationController
   end
 
   def invite_to_friendship
-    @friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
-    @friend_inverse = Friend.find_by(user_id: current_user.id, pal_id: params[:id])
+    @friend = Friend.find_by(user_id: current_user.id, pal_id: params[:id])
+    @inverse_friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
 
-    if !@friend
-      @friend = Friend.new(user_id: params[:id], pal_id: current_user.id)
-      @friend.save
-    elsif !@friend_inverse
+    if !current_user.friends.include?(@friend) && !current_user.inverse_friends.include?(@inverse_friend)
       @friend = Friend.new(user_id: current_user.id, pal_id: params[:id])
       @friend.save
     end
