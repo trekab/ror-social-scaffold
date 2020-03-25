@@ -19,20 +19,20 @@ class UsersController < ApplicationController
       @friend.save
     end
 
-    redirect_to users_path
+    redirect_to users_path, notice: 'Friendship request sent!'
   end
 
   def accept_friendship
     @friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
     @friend.accepted!
 
-    redirect_to users_path
+    redirect_to users_path, notice: 'Friendship request accepted!'
   end
 
   def reject_friendship
     @friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
     @friend.destroy
 
-    redirect_to users_path
+    redirect_to users_path, notice: 'Friendship request rejected!'
   end
 end
