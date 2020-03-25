@@ -28,4 +28,11 @@ class UsersController < ApplicationController
 
     redirect_to root_path
   end
+
+  def reject_friendship
+    @friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
+    @friend.destroy
+
+    redirect_to root_path
+  end
 end

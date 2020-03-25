@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'posts#index'
   get 'invite-to-friendship/:id', to: 'users#invite_to_friendship', as: 'invite_to_friendship'
   get 'accept-friendship/:id', to: 'users#accept_friendship', as: 'accept_friendship'
+  get 'reject-friendship/:id', to: 'users#reject_friendship', as: 'reject_friendship'
   devise_for :users
   resources :users, only: [:index, :show]
   resources :posts, only: [:index, :create] do
