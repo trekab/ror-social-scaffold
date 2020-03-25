@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def accept_friendship
-    @friend = Friend.find_by(user_id: current_user.id, pal_id: params[:id])
+    @friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
     @friend.accepted!
 
     redirect_to root_path
