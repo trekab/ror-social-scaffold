@@ -25,6 +25,8 @@ class UsersController < ApplicationController
   def accept_friendship
     @friend = Friend.find_by(user_id: params[:id], pal_id: current_user.id)
     @friend.accepted!
+    @mutual_friendship = Friend.create(user_id: current_user.id, pal_id: params[:id])
+    @mutual_friendship.accepted!
 
     redirect_to users_path, notice: 'Friendship request accepted!'
   end
