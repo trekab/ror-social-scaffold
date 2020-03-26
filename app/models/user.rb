@@ -13,10 +13,7 @@ class User < ApplicationRecord
   has_many :inverse_friends, class_name: 'Friend', foreign_key: 'pal_id'
 
   def pals
-    pals_array = friends.map { |friend| friend.pal if friend.accepted? }
-    inverse_pals = inverse_friends.map { |friend| friend.user if friend.accepted? }
-    inverse_pals.each { |pal| pals_array << pal }
-    pals_array.compact
+    friends.map { |friend| friend.pal if friend.accepted? }.compact
   end
 
   def pending_friends
