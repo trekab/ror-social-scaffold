@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-	subject do
-		User.new(name: 'jonsnow',
-		         email: 'jonsnow@ymail.com',
-		         password: 'password')
+  subject do
+    User.new(name: 'jonsnow',
+             email: 'jonsnow@ymail.com',
+             password: 'password')
   end
 
   it 'should be valid' do
