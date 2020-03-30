@@ -2,8 +2,6 @@
 
 > Stay in touch is a social media app where users can sign up, create posts, accept/reject friends requests and also view their friends' posts.
 
-![screenshot](./app_screenshot.png)
-
 Additional description about the project and its features.
 
 ## Built With
